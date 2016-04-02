@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'//com.android.application表示申明此工程为主工程，android-library'表示申明此工程为Library
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.example.penny.penny.testmvp"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false //（true表示打包签名的时候 是正式包 会执行混淆代码）
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' //定义代码混淆文件 注意：proguard-rules.pro要放在主工程的目录下
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+//    compile rootProject.ext.dependencies["support-v4"]
+//    compile 'com.android.support:support-v4:24.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
+    compile 'com.android.support:design:24.0.0-alpha1'
+    compile project(':xutils')  //申明主工程依赖的Library 注意拼写规则， 名字要与你的Library名字一样
+}
